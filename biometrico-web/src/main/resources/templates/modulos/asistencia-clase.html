@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Control de Asistencia — UMG Biométrico</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}"/>
+</head>
+<body>
+
+<nav th:replace="~{fragmentos/base :: navegacion}"></nav>
+
+<main class="contenedor-principal">
+    <div th:replace="~{fragmentos/base :: alertas}"></div>
+
+    <div class="pagina-encabezado">
+        <h2 class="pagina-titulo">
+            <span class="pagina-titulo__icono">✔</span>
+            Asistencia —
+            <span th:text="${curso.nombre}">Curso</span>
+        </h2>
+        <div class="pagina-encabezado__controles">
+            <input type="date" id="selectorFecha"
+                   th:value="${fecha}"
+                   class="campo__entrada campo__entrada--pequeno"
+                   onchange="cambiarFecha(this)"/>
+        </div>
+    </div>
+
+    <form th:action="@{/catedratico/asistencia/guardar}" method="post" id="formAsistencia">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <input type="hidden" name="cursoId" th:value="${curso.id}"/>
+
+        <!-- Árbol visual de asistencia: verde = presente, rojo = ausente -->
+        <div class="asistencia-arbol">
+            <div th:each="estudiante : ${estudiantes}"
+                 class="asistencia-tarjeta"
+                 th:classappend="${asistencias.?[estudiante.id == estudiante.id && presente].size() > 0} ? 'asistencia-tarjeta--presente' : 'asistencia-tarjeta--ausente'"
+                 th:id="'tarjeta-' + ${estudiante.id}">
+
+                <!-- Foto del estudiante -->
+                <div class="asistencia-tarjeta__foto">
+                    <img th:if="${estudiante.fotoPath != null}"
+                         th:src="@{/api/foto/{id}(id=${estudiante.id})}"
+                         th:alt="${estudiante.nombreCompleto}"
+                         class="asistencia-tarjeta__img"
+                         onerror="this.parentElement.innerHTML='<span class=asistencia-tarjeta__inicial>'+this.alt.charAt(0)+'</span>'"/>
+                    <span th:unless="${estudiante.fotoPath != null}"
+                          class="asistencia-tarjeta__inicial"
+                          th:text="${estudiante.nombres?.charAt(0)}">E</span>
+                </div>
+
+                <!-- Info del estudiante -->
+                <div class="asistencia-tarjeta__info">
+                    <div class="asistencia-tarjeta__nombre" th:text="${estudiante.nombreCompleto}">Nombre</div>
+                    <div class="asistencia-tarjeta__correo" th:text="${estudiante.correo ?: '—'}">correo</div>
+                    <div class="asistencia-tarjeta__carnet" th:text="${estudiante.carnet}">carnet</div>
+                </div>
+
+                <!-- Toggle presente/ausente -->
+                <div class="asistencia-tarjeta__estado">
+                    <label class="toggle-asistencia">
+                        <input type="checkbox"
+                               name="estudiantesPresentes"
+                               th:value="${estudiante.id}"
+                               class="toggle-asistencia__check"
+                               onchange="actualizarEstado(this)"
+                               th:checked="${asistencias.?[estudiante.id == estudiante.id && presente].size() > 0}"/>
+                        <span class="toggle-asistencia__texto">
+                            <span class="toggle-asistencia__presente">✓ Presente</span>
+                            <span class="toggle-asistencia__ausente">✗ Ausente</span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Sin estudiantes -->
+            <div th:if="${#lists.isEmpty(estudiantes)}" class="estado-vacio">
+                <div class="estado-vacio__icono">👥</div>
+                <p>No hay estudiantes inscritos en este curso.</p>
+            </div>
+        </div>
+
+        <!-- Resumen y acciones -->
+        <div class="asistencia-barra-acciones">
+            <div class="asistencia-conteo">
+                <span class="asistencia-conteo__presentes" id="conteoPresentes">0</span> presentes /
+                <span class="asistencia-conteo__total" th:text="${#lists.size(estudiantes)}">0</span> total
+            </div>
+            <div class="asistencia-botones">
+                <button type="button" class="btn btn--secundario btn--pequeno"
+                        onclick="marcarTodos(true)">Marcar Todos Presentes</button>
+                <button type="button" class="btn btn--secundario btn--pequeno"
+                        onclick="marcarTodos(false)">Marcar Todos Ausentes</button>
+                <button type="submit" class="btn btn--primario">
+                    💾 Guardar Asistencia
+                </button>
+            </div>
+        </div>
+    </form>
+</main>
+
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+
+<script th:src="@{/js/asistencia.js}"></script>
+<script>
+    function cambiarFecha(input) {
+        window.location.href = '/catedratico/curso/' + [[${curso.id}]] + '?fecha=' + input.value;
+    }
+</script>
+
+</body>
+</html>
