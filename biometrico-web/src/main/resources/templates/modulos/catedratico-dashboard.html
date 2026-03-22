@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dashboard Catedrático — UMG Biométrico</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}"/>
+</head>
+<body>
+
+<nav th:replace="~{fragmentos/base :: navegacion}"></nav>
+
+<main class="contenedor-principal">
+    <div th:replace="~{fragmentos/base :: alertas}"></div>
+
+    <div class="pagina-encabezado">
+        <h2 class="pagina-titulo">
+            <span class="pagina-titulo__icono">📋</span>
+            Proceso 4 — Dashboard Catedrático
+        </h2>
+        <div class="pagina-encabezado__info">
+            Catedrático: <strong th:text="${catedratico?.nombreCompleto}">Nombre</strong>
+        </div>
+    </div>
+
+    <!-- Sin cursos asignados -->
+    <div th:if="${#lists.isEmpty(cursos)}" class="estado-vacio">
+        <div class="estado-vacio__icono">📚</div>
+        <p class="estado-vacio__texto">No tiene cursos asignados en este momento.</p>
+    </div>
+
+    <!-- Lista de cursos como tarjetas -->
+    <div class="cursos-grilla" th:unless="${#lists.isEmpty(cursos)}">
+        <div th:each="curso : ${cursos}" class="curso-tarjeta">
+            <div class="curso-tarjeta__encabezado">
+                <div class="curso-tarjeta__codigo" th:text="${curso.codigo}">COD</div>
+                <h3 class="curso-tarjeta__nombre" th:text="${curso.nombre}">Curso</h3>
+                <div class="curso-tarjeta__info">
+                    Sección: <span th:text="${curso.seccion}">A</span> |
+                    Salón: <span th:text="${curso.salon?.nombre ?: 'No asignado'}">Salón</span>
+                </div>
+            </div>
+
+            <!-- Árbol visual de estudiantes (tarjetas) -->
+            <div class="estudiantes-arbol">
+                <div class="estudiantes-arbol__encabezado">
+                    <span th:text="${#lists.size(curso.estudiantes)}">0</span> estudiantes inscritos
+                </div>
+                <div class="estudiantes-grilla">
+                    <div th:each="est : ${curso.estudiantes}" class="est-tarjeta">
+                        <div class="est-tarjeta__foto">
+                            <img th:if="${est.fotoPath != null}"
+                                 th:src="@{/api/foto/{id}(id=${est.id})}"
+                                 th:alt="${est.nombreCompleto}"
+                                 class="est-tarjeta__img"
+                                 onerror="this.parentElement.innerHTML='<span class=est-tarjeta__inicial>'+this.alt.charAt(0)+'</span>'"/>
+                            <span th:unless="${est.fotoPath != null}"
+                                  class="est-tarjeta__inicial"
+                                  th:text="${est.nombres?.charAt(0)}">E</span>
+                        </div>
+                        <div class="est-tarjeta__info">
+                            <div class="est-tarjeta__nombre" th:text="${est.nombreCompleto}">Nombre</div>
+                            <div class="est-tarjeta__correo" th:text="${est.correo ?: '—'}">correo</div>
+                            <div class="est-tarjeta__carnet" th:text="${est.carnet}">carnet</div>
+                        </div>
+                    </div>
+                    <div th:if="${#lists.isEmpty(curso.estudiantes)}" class="estado-vacio--mini">
+                        Sin estudiantes inscritos
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones del curso -->
+            <div class="curso-tarjeta__acciones">
+                <a th:href="@{/catedratico/curso/{id}(id=${curso.id})}"
+                   class="btn btn--primario btn--pequeno">
+                    ✔ Registrar Asistencia Hoy
+                </a>
+                <a th:href="@{/reportes/asistencia/curso/{id}(id=${curso.id})}"
+                   class="btn btn--secundario btn--pequeno">
+                    📊 Ver Reporte
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+
+</body>
+</html>
