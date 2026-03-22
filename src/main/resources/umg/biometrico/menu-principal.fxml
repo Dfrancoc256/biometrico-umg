@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="umg.biometrico.controlador.ControladorMenu"
+            prefWidth="900" prefHeight="640"
+            stylesheets="@estilos.css">
+
+    <top>
+        <VBox style="-fx-background-color: #003366;">
+            <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 14 22; -fx-background-color: #003366;">
+                <Label text="UMG — Sistema de Control Biométrico"
+                       style="-fx-text-fill: white; -fx-font-size: 17px; -fx-font-weight: bold;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <VBox alignment="CENTER_RIGHT">
+                    <Label fx:id="etiquetaUsuario" text="" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13px;"/>
+                    <Label fx:id="etiquetaTipo"    text="" style="-fx-text-fill: #93c5fd; -fx-font-size: 11px;"/>
+                </VBox>
+            </HBox>
+            <Label text="Sede La Florida — Zona 19"
+                   style="-fx-text-fill: #93c5fd; -fx-font-size: 11px; -fx-padding: 0 22 10 22;"/>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: #f0f4f8;">
+            <VBox alignment="TOP_CENTER" spacing="30" style="-fx-padding: 40;">
+                <Label text="Seleccione un módulo" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #003366;"/>
+
+                <!-- Fila 1 -->
+                <HBox spacing="22" alignment="CENTER">
+                    <Button text="📝 Proceso 1&#10;Registro de Persona"
+                            onAction="#abrirRegistroPersona"
+                            styleClass="menu-card" prefWidth="190" prefHeight="100"/>
+                    <Button text="🚪 Proceso 2&#10;Ingreso Puerta Principal"
+                            onAction="#abrirIngresoPuertaPrincipal"
+                            styleClass="menu-card" prefWidth="190" prefHeight="100"/>
+                    <Button text="🏫 Proceso 3&#10;Ingreso por Salón"
+                            onAction="#abrirIngresoSalon"
+                            styleClass="menu-card" prefWidth="190" prefHeight="100"/>
+                </HBox>
+
+                <!-- Fila 2 -->
+                <HBox spacing="22" alignment="CENTER">
+                    <Button text="👩‍🏫 Proceso 4&#10;Dashboard Catedrático"
+                            onAction="#abrirDashboardCatedratico"
+                            styleClass="menu-card" prefWidth="190" prefHeight="100"/>
+                    <Button text="📊 Proceso 5&#10;Reportes y Estadísticas"
+                            onAction="#abrirReportes"
+                            styleClass="menu-card" prefWidth="190" prefHeight="100"/>
+                    <Button text="⛔ Módulo 6&#10;Personas Restringidas"
+                            onAction="#abrirPersonasRestringidas"
+                            styleClass="menu-card-danger" prefWidth="190" prefHeight="100"/>
+                </HBox>
+
+                <Separator/>
+
+                <Button text="🚪 Cerrar Sesión" onAction="#cerrarSesion"
+                        style="-fx-background-color: transparent; -fx-text-fill: #dc2626; -fx-font-size: 13px; -fx-cursor: hand;"/>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER" style="-fx-background-color: #1e3a5f; -fx-padding: 8;">
+            <Label text="© 2026 Universidad Mariano Gálvez de Guatemala — Sede La Florida, Zona 19"
+                   style="-fx-text-fill: #93c5fd; -fx-font-size: 10px;"/>
+        </HBox>
+    </bottom>
+</BorderPane>
