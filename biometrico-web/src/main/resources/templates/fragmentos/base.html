@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title th:replace="${titulo} ?: 'UMG Biométrico'">UMG Biométrico</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}"/>
+    <link rel="stylesheet" th:href="@{/css/iconos.css}"/>
+</head>
+<body>
+
+<!-- FRAGMENTO: barra de navegacion -->
+<nav th:fragment="navegacion" class="barra-nav">
+    <div class="barra-nav__marca">
+        <img th:src="@{/img/logo-umg.png}" alt="UMG" class="barra-nav__logo"
+             onerror="this.style.display='none'"/>
+        <div>
+            <span class="barra-nav__titulo">UMG Biométrico</span>
+            <span class="barra-nav__sede">Sede La Florida, Zona 19</span>
+        </div>
+    </div>
+    <ul class="barra-nav__menu">
+        <li><a th:href="@{/menu}" class="barra-nav__enlace">Inicio</a></li>
+        <li sec:authorize="hasAnyRole('ADMIN','CATEDRATICO')">
+            <a th:href="@{/registro}" class="barra-nav__enlace">Registro</a>
+        </li>
+        <li><a th:href="@{/catedratico}" class="barra-nav__enlace">Asistencia</a></li>
+        <li><a th:href="@{/reportes}" class="barra-nav__enlace">Reportes</a></li>
+        <li sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{/admin/restringidos}" class="barra-nav__enlace">Restringidos</a>
+        </li>
+    </ul>
+    <div class="barra-nav__usuario">
+        <span sec:authentication="name" class="barra-nav__carnet"></span>
+        <form th:action="@{/salir}" method="post" style="display:inline">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <button type="submit" class="btn btn--salir">Salir</button>
+        </form>
+    </div>
+</nav>
+
+<!-- FRAGMENTO: alerta de mensaje -->
+<div th:fragment="alertas">
+    <div th:if="${mensajeExito}" class="alerta alerta--exito" role="alert">
+        <span class="alerta__icono">✓</span>
+        <span th:text="${mensajeExito}"></span>
+    </div>
+    <div th:if="${mensajeError}" class="alerta alerta--error" role="alert">
+        <span class="alerta__icono">✗</span>
+        <span th:text="${mensajeError}"></span>
+    </div>
+</div>
+
+<!-- FRAGMENTO: pie de pagina -->
+<footer th:fragment="pie" class="pie">
+    <p>© 2026 Universidad Mariano Gálvez de Guatemala — Sede La Florida, Zona 19</p>
+</footer>
+
+</body>
+</html>
