@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="umg.biometrico.controlador.ControladorLogin"
+            prefWidth="900" prefHeight="620"
+            stylesheets="@estilos.css">
+
+    <left>
+        <VBox alignment="CENTER" spacing="10" styleClass="login-left-panel">
+            <Label text="UMG" styleClass="login-logo-text"/>
+            <Label text="Universidad Mariano Gálvez" styleClass="login-univ-name"/>
+            <Label text="Sede La Florida — Zona 19" styleClass="login-sede"/>
+            <Label text="Sistema de Control&#10;Biométrico 2026"
+                   styleClass="login-system-name" wrapText="true"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox alignment="CENTER" spacing="20" styleClass="login-form-panel">
+            <Label text="Iniciar Sesión" styleClass="login-title"/>
+            <VBox spacing="10" maxWidth="340">
+                <Label text="Número de carnet" styleClass="form-label"/>
+                <TextField fx:id="campoCarne" promptText="UMG-2026-0001" styleClass="form-input"/>
+                <Label text="Contraseña" styleClass="form-label"/>
+                <PasswordField fx:id="campoContrasena" promptText="Contraseña" styleClass="form-input"/>
+                <Label fx:id="etiquetaError" text="" styleClass="status-label" visible="false"/>
+                <Button fx:id="botonIngresar" text="INGRESAR" onAction="#accionIngresar"
+                        styleClass="btn-primary" maxWidth="Infinity"/>
+            </VBox>
+            <Label text="© 2026 Universidad Mariano Gálvez de Guatemala" styleClass="hint-text"/>
+        </VBox>
+    </center>
+</BorderPane>
