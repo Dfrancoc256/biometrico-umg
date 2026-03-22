@@ -1,0 +1,28 @@
+# Maven
+  target/
+  *.class
+  *.jar
+
+  # IDE
+  .idea/
+  *.iml
+  .eclipse/
+  .settings/
+  .project
+  .classpath
+
+  # Replit
+  .replit
+  replit.nix
+  .local/
+  .cache/
+
+  # Logs y datos
+  *.log
+  fotos_personas/
+  carnets/
+  reportes/
+
+  # MacOS
+  .DS_Store
+  
