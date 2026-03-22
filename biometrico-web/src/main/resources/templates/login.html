@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Inicio de Sesión — UMG Biométrico</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}"/>
+</head>
+<body class="pagina-login">
+
+<div class="login-contenedor">
+    <div class="login-tarjeta">
+
+        <!-- Encabezado UMG -->
+        <div class="login-encabezado">
+            <div class="login-escudo">🎓</div>
+            <h1 class="login-titulo">UMG Biométrico</h1>
+            <p class="login-subtitulo">Sede La Florida, Zona 19</p>
+            <p class="login-descripcion">Sistema de Control de Acceso y Asistencia</p>
+        </div>
+
+        <!-- Alertas -->
+        <div th:if="${mensajeError}" class="alerta alerta--error">
+            <span class="alerta__icono">✗</span>
+            <span th:text="${mensajeError}">Error</span>
+        </div>
+        <div th:if="${mensajeSalida}" class="alerta alerta--exito">
+            <span class="alerta__icono">✓</span>
+            <span th:text="${mensajeSalida}">Salida</span>
+        </div>
+
+        <!-- Formulario -->
+        <form th:action="@{/login}" method="post" class="login-formulario">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+            <div class="campo">
+                <label class="campo__etiqueta" for="carnet">Número de Carnet</label>
+                <input type="text" id="carnet" name="carnet"
+                       class="campo__entrada"
+                       placeholder="Ej. 2024-001 o ADMIN-001"
+                       autocomplete="username"
+                       required/>
+            </div>
+
+            <div class="campo">
+                <label class="campo__etiqueta" for="contrasena">Contraseña</label>
+                <input type="password" id="contrasena" name="contrasena"
+                       class="campo__entrada"
+                       placeholder="Su contraseña"
+                       autocomplete="current-password"
+                       required/>
+            </div>
+
+            <button type="submit" class="btn btn--primario btn--bloque">
+                Iniciar Sesión
+            </button>
+        </form>
+
+        <!-- Credenciales predeterminadas (solo para demo) -->
+        <div class="login-ayuda">
+            <p class="login-ayuda__texto">
+                Admin predeterminado: <strong>ADMIN-001</strong> / <strong>admin123</strong>
+            </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
