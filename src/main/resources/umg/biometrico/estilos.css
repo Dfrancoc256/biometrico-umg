@@ -1,0 +1,289 @@
+/* ===================================================
+   estilos.css — Hoja de estilos UMG Sistema Biométrico
+   Universidad Mariano Gálvez — Sede La Florida, Zona 19
+   2026
+   =================================================== */
+
+.root {
+    -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -fx-base: #f5f6fa;
+    -fx-background: #f5f6fa;
+}
+
+/* ---------- Barra superior ---------- */
+.top-bar {
+    -fx-background-color: #003366;
+    -fx-padding: 10 20;
+}
+
+.top-title {
+    -fx-text-fill: white;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Panel izquierdo login ---------- */
+.login-left-panel {
+    -fx-background-color: #003366;
+    -fx-padding: 50 40;
+    -fx-min-width: 300px;
+}
+
+.login-logo-text {
+    -fx-text-fill: white;
+    -fx-font-size: 60px;
+    -fx-font-weight: bold;
+}
+
+.login-univ-name {
+    -fx-text-fill: #ecf0f1;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+}
+
+.login-sede {
+    -fx-text-fill: #93c5fd;
+    -fx-font-size: 12px;
+}
+
+.login-system-name {
+    -fx-text-fill: #60a5fa;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: center;
+    -fx-wrap-text: true;
+}
+
+.login-form-panel {
+    -fx-background-color: white;
+    -fx-padding: 50 60;
+}
+
+.login-title {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #003366;
+}
+
+/* ---------- Formularios ---------- */
+.form-label {
+    -fx-text-fill: #374151;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.campo-texto, .form-input {
+    -fx-background-color: #f9fafb;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 8 12;
+    -fx-font-size: 13px;
+}
+
+.campo-texto:focused, .form-input:focused {
+    -fx-border-color: #2563eb;
+    -fx-background-color: white;
+}
+
+.section-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #003366;
+}
+
+/* ---------- Botones ---------- */
+.boton-primario, .btn-primary {
+    -fx-background-color: #003366;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.boton-primario:hover, .btn-primary:hover {
+    -fx-background-color: #1d4ed8;
+}
+
+.btn-secondary {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-secondary:hover {
+    -fx-background-color: #3b82f6;
+}
+
+.btn-danger {
+    -fx-background-color: #dc2626;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-padding: 10 20;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.btn-danger:hover {
+    -fx-background-color: #ef4444;
+}
+
+.btn-outline {
+    -fx-background-color: transparent;
+    -fx-text-fill: #003366;
+    -fx-border-color: #003366;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+    -fx-padding: 9 18;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+}
+
+.btn-outline:hover {
+    -fx-background-color: #003366;
+    -fx-text-fill: white;
+}
+
+.btn-back {
+    -fx-background-color: transparent;
+    -fx-text-fill: #93c5fd;
+    -fx-font-size: 13px;
+    -fx-cursor: hand;
+    -fx-padding: 5 12;
+}
+
+.btn-back:hover {
+    -fx-text-fill: white;
+}
+
+/* ---------- Menú ---------- */
+.menu-card {
+    -fx-background-color: white;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #003366;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.10), 8, 0, 0, 3);
+    -fx-text-alignment: center;
+}
+
+.menu-card:hover {
+    -fx-background-color: #003366;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,51,102,0.4), 12, 0, 0, 4);
+}
+
+.menu-card-danger {
+    -fx-background-color: white;
+    -fx-border-color: #ef4444;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #dc2626;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.10), 8, 0, 0, 3);
+    -fx-text-alignment: center;
+}
+
+.menu-card-danger:hover {
+    -fx-background-color: #dc2626;
+    -fx-text-fill: white;
+}
+
+/* ---------- Paneles ---------- */
+.sidebar {
+    -fx-background-color: white;
+    -fx-padding: 20;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 0 1 0 0;
+}
+
+.form-panel {
+    -fx-background-color: white;
+    -fx-padding: 20;
+}
+
+.foto-panel {
+    -fx-background-color: white;
+    -fx-padding: 20;
+    -fx-border-color: #e5e7eb;
+    -fx-border-width: 0 0 0 1;
+}
+
+.content-scroll {
+    -fx-background-color: #f5f6fa;
+}
+
+/* ---------- Foto ---------- */
+.foto-preview {
+    -fx-background-color: #f3f4f6;
+    -fx-border-color: #d1d5db;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+/* ---------- Tabla ---------- */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #e5e7eb;
+}
+
+.table-view .column-header {
+    -fx-background-color: #003366;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #dbeafe;
+}
+
+/* ---------- Árbol ---------- */
+.tree-view {
+    -fx-background-color: white;
+    -fx-border-color: #e5e7eb;
+}
+
+.tree-cell:selected {
+    -fx-background-color: #003366;
+    -fx-text-fill: white;
+}
+
+/* ---------- Estado y mensajes ---------- */
+.status-label {
+    -fx-text-fill: #dc2626;
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+}
+
+.success-label {
+    -fx-text-fill: #16a34a;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.hint-text {
+    -fx-text-fill: #6b7280;
+    -fx-font-size: 11px;
+    -fx-wrap-text: true;
+}
+
+.stat-verde { -fx-text-fill: #16a34a; -fx-font-size: 13px; -fx-font-weight: bold; }
+.stat-rojo  { -fx-text-fill: #dc2626; -fx-font-size: 13px; -fx-font-weight: bold; }
