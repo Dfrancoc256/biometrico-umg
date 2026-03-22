@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="umg.biometrico.controlador.ControladorRegistro"
+            prefWidth="1050" prefHeight="740"
+            stylesheets="@estilos.css">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
+            <Button text="← Volver" onAction="#accionVolver" styleClass="btn-back"/>
+            <Label text="📝 Proceso 1 — Registro Biográfico y Biométrico" styleClass="top-title"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" styleClass="content-scroll">
+            <HBox spacing="20" style="-fx-padding: 15;">
+
+                <!-- Formulario datos -->
+                <VBox spacing="12" styleClass="form-panel" HBox.hgrow="ALWAYS">
+                    <Label text="Información Biográfica" styleClass="section-title"/>
+
+                    <GridPane hgap="14" vgap="10">
+                        <Label text="Nombre *"  GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="form-label"/>
+                        <TextField fx:id="campoNombre"    GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="form-input" minWidth="230"/>
+
+                        <Label text="Apellido *" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="form-label"/>
+                        <TextField fx:id="campoApellido"  GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="form-input"/>
+
+                        <Label text="Teléfono"  GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="form-label"/>
+                        <TextField fx:id="campoTelefono"  GridPane.columnIndex="1" GridPane.rowIndex="2"
+                                   promptText="+502 5XXX-XXXX" styleClass="form-input"/>
+
+                        <Label text="Correo *"  GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="form-label"/>
+                        <TextField fx:id="campoCorreo"    GridPane.columnIndex="1" GridPane.rowIndex="3"
+                                   promptText="usuario@miumg.edu.gt" styleClass="form-input"/>
+
+                        <Label text="Tipo de persona" GridPane.columnIndex="0" GridPane.rowIndex="4" styleClass="form-label"/>
+                        <ComboBox fx:id="combotipo" GridPane.columnIndex="1" GridPane.rowIndex="4" maxWidth="Infinity"/>
+
+                        <Label text="Carrera"   GridPane.columnIndex="0" GridPane.rowIndex="5" styleClass="form-label"/>
+                        <TextField fx:id="campoCarrera"   GridPane.columnIndex="1" GridPane.rowIndex="5"
+                                   promptText="Ingeniería en Sistemas..." styleClass="form-input"/>
+
+                        <Label text="Sección"   GridPane.columnIndex="0" GridPane.rowIndex="6" styleClass="form-label"/>
+                        <TextField fx:id="campoSeccion"   GridPane.columnIndex="1" GridPane.rowIndex="6"
+                                   promptText="A, B, C..." styleClass="form-input"/>
+                    </GridPane>
+
+                    <Separator/>
+                    <Label fx:id="etiquetaCarnet" text="" styleClass="success-label"/>
+                    <HBox spacing="10">
+                        <Button text="💾 Guardar y Generar Carnet" onAction="#accionGuardar"
+                                styleClass="btn-primary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                        <Button text="🗑 Limpiar" onAction="#accionLimpiar" styleClass="btn-outline"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Panel cámara / foto -->
+                <VBox spacing="10" styleClass="foto-panel" prefWidth="310">
+                    <Label text="Fotografía Biométrica" styleClass="section-title"/>
+
+                    <Label text="Vista en vivo:" styleClass="form-label"/>
+                    <ImageView fx:id="vistaCamara" fitWidth="280" fitHeight="200"
+                               preserveRatio="true" styleClass="foto-preview"/>
+
+                    <HBox spacing="8">
+                        <Button text="📷 Capturar" onAction="#accionCapturarFoto"
+                                fx:id="botonCapturar" styleClass="btn-secondary" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                        <Button text="🖼 Cargar archivo" onAction="#accionCargarFoto" styleClass="btn-outline"/>
+                    </HBox>
+
+                    <Label text="Foto capturada:" styleClass="form-label"/>
+                    <ImageView fx:id="vistaFotoCapturada" fitWidth="280" fitHeight="200"
+                               preserveRatio="true" styleClass="foto-preview"/>
+
+                    <Label fx:id="etiquetaEstadoEncoding" text="Sin encoding." wrapText="true" styleClass="hint-text"/>
+
+                    <Button fx:id="botonGuardar" text="💾 Guardar" onAction="#accionGuardar"
+                            styleClass="btn-primary" maxWidth="Infinity" visible="false"/>
+                </VBox>
+            </HBox>
+        </ScrollPane>
+    </center>
+</BorderPane>
