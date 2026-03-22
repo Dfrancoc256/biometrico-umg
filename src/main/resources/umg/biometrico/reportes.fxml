@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="umg.biometrico.controlador.ControladorReportes"
+            prefWidth="1100" prefHeight="740"
+            stylesheets="@estilos.css">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
+            <Button text="← Volver" onAction="#accionVolver" styleClass="btn-back"/>
+            <Label text="📊 Proceso 5 — Reportes y Estadísticas" styleClass="top-title"/>
+        </HBox>
+    </top>
+
+    <center>
+        <HBox spacing="0">
+            <!-- Panel de filtros -->
+            <VBox spacing="12" styleClass="sidebar" prefWidth="295">
+                <Label text="Configuración del Reporte" styleClass="section-title"/>
+
+                <Label text="Instalación:" styleClass="form-label"/>
+                <ComboBox fx:id="comboInstalacion" maxWidth="Infinity" onAction="#cargarPuertas"/>
+
+                <Label text="Puerta / Salón:" styleClass="form-label"/>
+                <ComboBox fx:id="comboPuerta" maxWidth="Infinity"/>
+
+                <Label text="Fecha específica:" styleClass="form-label"/>
+                <DatePicker fx:id="selectorFecha" maxWidth="Infinity"/>
+
+                <Label text="Orden de resultados:" styleClass="form-label"/>
+                <ComboBox fx:id="comboOrden" maxWidth="Infinity"/>
+
+                <Separator/>
+                <Label text="Árbol 1 — Histórico de ingresos por puerta:" styleClass="form-label"/>
+                <Button text="🌳 Generar árbol histórico (puerta)"
+                        onAction="#accionReporteHistoricoPuerta"
+                        styleClass="btn-secondary" maxWidth="Infinity"/>
+
+                <Label text="Árbol 2 — Ingresos por fecha y puerta:" styleClass="form-label"/>
+                <Button text="🔍 Buscar por fecha (puerta)"
+                        onAction="#accionReportePorFecha"
+                        styleClass="btn-primary" maxWidth="Infinity"/>
+
+                <Label text="Árbol 3 — Histórico por salón:" styleClass="form-label"/>
+                <Button text="🌳 Generar árbol histórico (salón)"
+                        onAction="#accionReporteHistoricoSalon"
+                        styleClass="btn-secondary" maxWidth="Infinity"/>
+
+                <Label text="Árbol 4 — Por fecha y salón:" styleClass="form-label"/>
+                <Button text="🔍 Buscar por fecha (salón)"
+                        onAction="#accionReporteSalonPorFecha"
+                        styleClass="btn-primary" maxWidth="Infinity"/>
+            </VBox>
+
+            <!-- Árbol de resultados -->
+            <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS" spacing="10" style="-fx-padding: 15;">
+                <Label text="Árbol de Resultados" styleClass="section-title"/>
+                <TreeView fx:id="arbolReporte" VBox.vgrow="ALWAYS"/>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>
