@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Personas Restringidas — UMG Biométrico</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}"/>
+</head>
+<body>
+<nav th:replace="~{fragmentos/base :: navegacion}"></nav>
+<main class="contenedor-principal">
+    <div th:replace="~{fragmentos/base :: alertas}"></div>
+    <div class="pagina-encabezado">
+        <h2 class="pagina-titulo">
+            <span class="pagina-titulo__icono">🚫</span>
+            Módulo 6 — Personas Restringidas
+        </h2>
+        <a th:href="@{/registro/lista}" class="btn btn--secundario">Buscar Persona</a>
+    </div>
+
+    <div th:if="${#lists.isEmpty(personas)}" class="estado-vacio">
+        <div class="estado-vacio__icono">✅</div>
+        <p class="estado-vacio__texto">No hay personas con restricciones activas.</p>
+    </div>
+
+    <div class="tabla-contenedor" th:unless="${#lists.isEmpty(personas)}">
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Carnet</th>
+                    <th>Nombre Completo</th>
+                    <th>Tipo</th>
+                    <th>Correo</th>
+                    <th>Motivo de Restricción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${personas}" class="tabla__fila--restringida">
+                    <td th:text="${p.carnet}">carnet</td>
+                    <td th:text="${p.nombreCompleto}">nombre</td>
+                    <td th:text="${p.tipoPersona.etiqueta}">tipo</td>
+                    <td th:text="${p.correo ?: '—'}">correo</td>
+                    <td th:text="${p.motivoRestriccion ?: 'Sin motivo registrado'}">motivo</td>
+                    <td>
+                        <form th:action="@{/admin/restringidos/remover/{id}(id=${p.id})}"
+                              method="post" style="display:inline">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                            <button type="submit" class="btn btn--exito btn--pequeno"
+                                    onclick="return confirm('¿Remover restricción?')">
+                                ✓ Remover
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Formulario para restringir una persona -->
+    <div class="tarjeta-formulario">
+        <h3>Agregar Restricción</h3>
+        <form class="formulario-inline">
+            <div class="campo campo--inline">
+                <label class="campo__etiqueta">Buscar persona por carnet o nombre</label>
+                <input type="text" id="busquedaRestriccion" class="campo__entrada"
+                       placeholder="Ingrese carnet o nombre..."
+                       oninput="buscarParaRestringir(this.value)"/>
+            </div>
+            <div id="resultadosBusqueda" class="resultados-busqueda"></div>
+        </form>
+    </div>
+</main>
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+<script th:src="@{/js/restringidos.js}"></script>
+</body>
+</html>
