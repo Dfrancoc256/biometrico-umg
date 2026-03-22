@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="umg.biometrico.controlador.ControladorRestringidos"
+            prefWidth="1050" prefHeight="700"
+            stylesheets="@estilos.css">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
+            <Button text="← Volver" onAction="#accionVolver" styleClass="btn-back"/>
+            <Label text="⛔ Módulo de Personas Restringidas" styleClass="top-title"/>
+        </HBox>
+    </top>
+
+    <center>
+        <HBox spacing="0">
+            <!-- Tabla de personas -->
+            <VBox spacing="10" HBox.hgrow="ALWAYS" styleClass="form-panel">
+                <HBox spacing="8">
+                    <TextField fx:id="campoFiltro" promptText="Buscar por nombre o carnet…"
+                               HBox.hgrow="ALWAYS" onAction="#accionFiltrar"/>
+                    <Button text="🔍 Filtrar"         onAction="#accionFiltrar"       styleClass="btn-primary"/>
+                    <Button text="⛔ Solo restringidos" onAction="#accionToggleSoloRestringidos" styleClass="btn-outline"/>
+                </HBox>
+
+                <TableView fx:id="tablaPersonas" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="columnaCarnet"      text="Carnet"           prefWidth="140"/>
+                        <TableColumn fx:id="columnaNombre"      text="Nombre completo"  prefWidth="260"/>
+                        <TableColumn fx:id="columnaTipo"        text="Tipo"             prefWidth="120"/>
+                        <TableColumn fx:id="columnaMotivo"      text="Motivo"           prefWidth="250"/>
+                        <TableColumn fx:id="columnaRestringido" text="Restringido"      prefWidth="100"/>
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
+
+            <!-- Panel de acciones -->
+            <VBox spacing="12" styleClass="sidebar" prefWidth="295">
+                <Label text="Gestionar Restricción" styleClass="section-title"/>
+                <Label fx:id="etiquetaSeleccionada" text="Ninguna persona seleccionada"
+                       wrapText="true" styleClass="hint-text"/>
+
+                <Label text="Motivo de Restricción:" styleClass="form-label"/>
+                <TextArea fx:id="campoMotivo"
+                          promptText="Describa el motivo de restricción…"
+                          prefRowCount="5" wrapText="true"/>
+
+                <Button fx:id="botonRestringir" text="⛔ Restringir persona"
+                        onAction="#accionRestringir"
+                        styleClass="btn-danger" maxWidth="Infinity" disable="true"/>
+
+                <Separator/>
+
+                <Button fx:id="botonDesrestringir" text="✅ Quitar restricción"
+                        onAction="#accionDesrestringir"
+                        styleClass="btn-secondary" maxWidth="Infinity" disable="true"/>
+
+                <Label text="NOTA: Las personas restringidas verán su acceso denegado en el control de ingreso."
+                       wrapText="true" styleClass="hint-text"/>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>
