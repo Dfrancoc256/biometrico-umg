@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.cell.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="umg.biometrico.ui.CatedraticoDashboardController"
+            prefWidth="1100" prefHeight="750" styleClass="root-pane">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
+            <Button text="← Volver" onAction="#handleVolver" styleClass="btn-back"/>
+            <Label text="📋 Dashboard Catedrático — Árbol de Asistencia" styleClass="top-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="bienvenidaLabel" styleClass="top-user"/>
+        </HBox>
+    </top>
+
+    <left>
+        <VBox spacing="12" styleClass="sidebar" prefWidth="270">
+            <Label text="Filtros" styleClass="section-title"/>
+            <Label text="Curso" styleClass="form-label"/>
+            <ComboBox fx:id="cursoCombo" maxWidth="Infinity"/>
+            <Label text="Fecha" styleClass="form-label"/>
+            <DatePicker fx:id="fechaPicker" maxWidth="Infinity"/>
+            <Separator/>
+            <HBox spacing="8">
+                <Label fx:id="presentesLabel" text="✅ Presentes: 0" styleClass="stat-verde" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <HBox spacing="8">
+                <Label fx:id="ausentesLabel" text="❌ Ausentes: 0" styleClass="stat-rojo" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <Separator/>
+            <Button text="✔ Confirmar Asistencia del Curso" onAction="#handleConfirmarAsistencia"
+                    fx:id="confirmarAsistenciaBtn" styleClass="btn-primary" maxWidth="Infinity"/>
+            <Button text="📄 Exportar PDF" onAction="#handleExportarPDF"
+                    fx:id="exportarPDFBtn" styleClass="btn-secondary" maxWidth="Infinity"/>
+            <Separator/>
+            <Label fx:id="statusLabel" text="" wrapText="true" styleClass="status-label"/>
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="10" styleClass="dashboard-center">
+            <Label text="Árbol de Asistencia" styleClass="section-title"/>
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="tree-scroll">
+                <FlowPane fx:id="arbolAsistenciaPane" hgap="12" vgap="12" styleClass="arbol-pane"/>
+            </ScrollPane>
+        </VBox>
+    </center>
+</BorderPane>
