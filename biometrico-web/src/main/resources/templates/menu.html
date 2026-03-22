@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Menú Principal — UMG Biométrico</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}"/>
+</head>
+<body>
+
+<nav th:replace="~{fragmentos/base :: navegacion}"></nav>
+
+<main class="contenedor-principal">
+    <div th:replace="~{fragmentos/base :: alertas}"></div>
+
+    <!-- Bienvenida -->
+    <div class="bienvenida">
+        <h2 class="bienvenida__titulo">
+            Bienvenido, <span th:text="${nombreCompleto}">Usuario</span>
+        </h2>
+        <p class="bienvenida__subtitulo">
+            <span th:text="${tipo?.etiqueta}">Tipo</span> —
+            Carnet: <strong sec:authentication="name"></strong>
+        </p>
+    </div>
+
+    <!-- Tarjetas de módulos -->
+    <div class="modulos-grilla">
+
+        <!-- Proceso 1: Registro -->
+        <a th:href="@{/registro}" class="modulo-tarjeta modulo-tarjeta--azul"
+           sec:authorize="hasAnyRole('ADMIN','CATEDRATICO')">
+            <div class="modulo-tarjeta__icono">👤</div>
+            <div class="modulo-tarjeta__numero">Proceso 1</div>
+            <h3 class="modulo-tarjeta__titulo">Registro Biográfico / Biométrico</h3>
+            <p class="modulo-tarjeta__desc">Registro de personas con foto, datos biográficos y captura facial</p>
+        </a>
+
+        <!-- Proceso 2: Control de Ingreso Puerta -->
+        <a th:href="@{/ingreso/puerta}" class="modulo-tarjeta modulo-tarjeta--verde">
+            <div class="modulo-tarjeta__icono">🚪</div>
+            <div class="modulo-tarjeta__numero">Proceso 2</div>
+            <h3 class="modulo-tarjeta__titulo">Control de Ingreso</h3>
+            <p class="modulo-tarjeta__desc">Reconocimiento facial en puertas principales de acceso</p>
+        </a>
+
+        <!-- Proceso 3: Control Salón -->
+        <a th:href="@{/ingreso/salon}" class="modulo-tarjeta modulo-tarjeta--verde">
+            <div class="modulo-tarjeta__icono">🏫</div>
+            <div class="modulo-tarjeta__numero">Proceso 3</div>
+            <h3 class="modulo-tarjeta__titulo">Control de Ingreso Salón</h3>
+            <p class="modulo-tarjeta__desc">Reconocimiento facial en salones de clase</p>
+        </a>
+
+        <!-- Proceso 4: Dashboard Catedrático -->
+        <a th:href="@{/catedratico}" class="modulo-tarjeta modulo-tarjeta--naranja"
+           sec:authorize="hasAnyRole('ADMIN','CATEDRATICO')">
+            <div class="modulo-tarjeta__icono">📋</div>
+            <div class="modulo-tarjeta__numero">Proceso 4</div>
+            <h3 class="modulo-tarjeta__titulo">Dashboard Catedrático</h3>
+            <p class="modulo-tarjeta__desc">Árbol visual de estudiantes con control de asistencia</p>
+        </a>
+
+        <!-- Proceso 5: Reportes -->
+        <a th:href="@{/reportes}" class="modulo-tarjeta modulo-tarjeta--morado">
+            <div class="modulo-tarjeta__icono">📊</div>
+            <div class="modulo-tarjeta__numero">Proceso 5</div>
+            <h3 class="modulo-tarjeta__titulo">Reportes y Estadísticas</h3>
+            <p class="modulo-tarjeta__desc">4 vistas de árbol: puertas e ingresos por fecha y salón</p>
+        </a>
+
+        <!-- Módulo 6: Personas Restringidas -->
+        <a th:href="@{/admin/restringidos}" class="modulo-tarjeta modulo-tarjeta--rojo"
+           sec:authorize="hasRole('ADMIN')">
+            <div class="modulo-tarjeta__icono">🚫</div>
+            <div class="modulo-tarjeta__numero">Módulo 6</div>
+            <h3 class="modulo-tarjeta__titulo">Personas Restringidas</h3>
+            <p class="modulo-tarjeta__desc">Gestión de restricciones de acceso con motivo y registro</p>
+        </a>
+
+    </div>
+</main>
+
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+
+</body>
+</html>
