@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="umg.biometrico.ui.MainMenuController"
+            prefWidth="900" prefHeight="650" styleClass="root-pane">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
+            <Label text="🎓 UMG Registro Biométrico" styleClass="top-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="bienvenidaLabel" styleClass="top-user"/>
+            <Button text="Cerrar Sesión" onAction="#cerrarSesion" styleClass="btn-outline-sm"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="30" styleClass="menu-center">
+            <Label text="Menú Principal" styleClass="page-title"/>
+            <GridPane hgap="20" vgap="20" alignment="CENTER">
+                <Button GridPane.columnIndex="0" GridPane.rowIndex="0"
+                        text="📝 Registro de Personas" onAction="#irRegistroPersona"
+                        styleClass="menu-card" prefWidth="200" prefHeight="120"
+                        wrapText="true"/>
+                <Button GridPane.columnIndex="1" GridPane.rowIndex="0"
+                        text="🚪 Control de Ingreso (Cámara)" onAction="#irCamaraIngreso"
+                        styleClass="menu-card" prefWidth="200" prefHeight="120"
+                        wrapText="true"/>
+                <Button GridPane.columnIndex="2" GridPane.rowIndex="0"
+                        text="📋 Dashboard Catedrático" onAction="#irDashboardCatedratico"
+                        styleClass="menu-card" prefWidth="200" prefHeight="120"
+                        wrapText="true"/>
+                <Button GridPane.columnIndex="0" GridPane.rowIndex="1"
+                        text="📊 Reportes y Estadísticas" onAction="#irReportes"
+                        styleClass="menu-card" prefWidth="200" prefHeight="120"
+                        wrapText="true"/>
+                <Button GridPane.columnIndex="1" GridPane.rowIndex="1"
+                        text="⛔ Personas Restringidas" onAction="#irPersonasRestringidas"
+                        styleClass="menu-card-danger" prefWidth="200" prefHeight="120"
+                        wrapText="true"/>
+            </GridPane>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER" styleClass="bottom-bar">
+            <Label text="Sistema de Registro Biométrico UMG 2.0 — 2026" styleClass="footer-text"/>
+        </HBox>
+    </bottom>
+</BorderPane>
