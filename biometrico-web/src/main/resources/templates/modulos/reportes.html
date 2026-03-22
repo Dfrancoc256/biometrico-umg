@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Reportes — UMG Biométrico</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}"/>
+</head>
+<body>
+<nav th:replace="~{fragmentos/base :: navegacion}"></nav>
+<main class="contenedor-principal">
+    <div class="pagina-encabezado">
+        <h2 class="pagina-titulo">
+            <span class="pagina-titulo__icono">📊</span>
+            Proceso 5 — Reportes y Estadísticas
+        </h2>
+    </div>
+
+    <div class="reportes-grilla">
+
+        <!-- Vista 1: Histórico por puerta -->
+        <div class="reporte-tarjeta">
+            <div class="reporte-tarjeta__icono">🚪</div>
+            <h3 class="reporte-tarjeta__titulo">Ingresos por Puerta</h3>
+            <p>Historial completo de ingresos por cada puerta de acceso</p>
+            <div class="campo">
+                <select id="selectPuerta" class="campo__entrada">
+                    <option value="">Seleccione una puerta...</option>
+                    <option th:each="p : ${puertas}"
+                            th:value="${p.id}"
+                            th:text="${p.nombre}">Puerta</option>
+                </select>
+            </div>
+            <button class="btn btn--primario" onclick="verReportePuerta()">Ver Reporte</button>
+        </div>
+
+        <!-- Vista 2: Ingresos por fecha -->
+        <div class="reporte-tarjeta">
+            <div class="reporte-tarjeta__icono">📅</div>
+            <h3 class="reporte-tarjeta__titulo">Ingresos por Fecha</h3>
+            <p>Todos los ingresos registrados en una fecha específica</p>
+            <div class="campo">
+                <input type="date" id="fechaIngreso" class="campo__entrada"
+                       th:value="${hoy}"/>
+            </div>
+            <button class="btn btn--primario" onclick="verReporteFecha()">Ver Reporte</button>
+        </div>
+
+        <!-- Vista 3: Asistencia por curso -->
+        <div class="reporte-tarjeta">
+            <div class="reporte-tarjeta__icono">🏫</div>
+            <h3 class="reporte-tarjeta__titulo">Asistencia por Curso</h3>
+            <p>Reporte completo de asistencia de todos los estudiantes del curso</p>
+            <div class="campo">
+                <select id="selectCurso" class="campo__entrada">
+                    <option value="">Seleccione un curso...</option>
+                    <option th:each="c : ${cursos}"
+                            th:value="${c.id}"
+                            th:text="${c.nombre + ' (' + c.codigo + ')'}">Curso</option>
+                </select>
+            </div>
+            <button class="btn btn--primario" onclick="verReporteCurso()">Ver Reporte</button>
+        </div>
+
+        <!-- Vista 4: Salones activos -->
+        <div class="reporte-tarjeta">
+            <div class="reporte-tarjeta__icono">📋</div>
+            <h3 class="reporte-tarjeta__titulo">Ingresos por Salón</h3>
+            <p>Historial de ingresos por cada salón de clases</p>
+            <div class="campo">
+                <select id="selectSalon" class="campo__entrada">
+                    <option value="">Seleccione un salón...</option>
+                    <option th:each="s : ${salones}"
+                            th:value="${s.id}"
+                            th:text="${s.nombre}">Salón</option>
+                </select>
+            </div>
+            <button class="btn btn--primario" onclick="verReporteSalon()">Ver Reporte</button>
+        </div>
+
+    </div>
+</main>
+<footer th:replace="~{fragmentos/base :: pie}"></footer>
+<script>
+    function verReportePuerta() {
+        const id = document.getElementById('selectPuerta').value;
+        if (id) window.location.href = '/reportes/ingresos/puerta/' + id;
+    }
+    function verReporteFecha() {
+        const f = document.getElementById('fechaIngreso').value;
+        if (f) window.location.href = '/reportes/ingresos/fecha?fecha=' + f;
+    }
+    function verReporteCurso() {
+        const id = document.getElementById('selectCurso').value;
+        if (id) window.location.href = '/reportes/asistencia/curso/' + id;
+    }
+    function verReporteSalon() {
+        const id = document.getElementById('selectSalon').value;
+        if (id) window.location.href = '/reportes/ingresos/puerta/' + id;
+    }
+</script>
+</body>
+</html>
