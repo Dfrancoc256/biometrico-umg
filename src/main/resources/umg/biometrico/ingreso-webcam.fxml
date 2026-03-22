@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="umg.biometrico.controlador.ControladorIngreso"
+            prefWidth="1100" prefHeight="720"
+            stylesheets="@estilos.css">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
+            <Button text="← Volver" onAction="#accionVolver" styleClass="btn-back"/>
+            <Label fx:id="etiquetaTitulo" text="Control de Ingreso" styleClass="top-title"/>
+        </HBox>
+    </top>
+
+    <center>
+        <HBox spacing="0">
+            <!-- Vista de cámara -->
+            <VBox alignment="CENTER" spacing="12"
+                  style="-fx-background-color: #111827; -fx-padding: 20;"
+                  HBox.hgrow="ALWAYS">
+                <ImageView fx:id="vistaCamara" fitWidth="640" fitHeight="480" preserveRatio="true"/>
+
+                <Label fx:id="etiquetaEstado" text="Esperando…"
+                       style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #fbbf24;"/>
+                <Label fx:id="etiquetaPersona" text=""
+                       style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+                <Label fx:id="etiquetaCarnet"  text=""
+                       style="-fx-font-size: 13px; -fx-text-fill: #93c5fd;"/>
+            </VBox>
+
+            <!-- Panel lateral -->
+            <VBox spacing="14" styleClass="sidebar" prefWidth="295">
+                <Label text="Instalación:" styleClass="form-label"/>
+                <ComboBox fx:id="comboInstalacion" maxWidth="Infinity" onAction="#cargarPuertas"/>
+
+                <Label text="Puerta / Salón:" styleClass="form-label"/>
+                <ComboBox fx:id="comboPuerta" maxWidth="Infinity"/>
+
+                <Separator/>
+
+                <Label text="Ingreso manual por carnet:" styleClass="form-label"/>
+                <HBox spacing="6">
+                    <TextField fx:id="campoCarnetManual" promptText="UMG-2026-XXXX"
+                               HBox.hgrow="ALWAYS" onAction="#accionBuscarPorCarnet"/>
+                    <Button text="↵ Buscar" onAction="#accionBuscarPorCarnet" styleClass="btn-primary"/>
+                </HBox>
+
+                <Separator/>
+
+                <Label text="Registros recientes:" styleClass="section-title"/>
+                <ListView fx:id="listaRegistros" VBox.vgrow="ALWAYS"
+                          style="-fx-font-size: 11px;"/>
+            </VBox>
+        </HBox>
+    </center>
+</BorderPane>
