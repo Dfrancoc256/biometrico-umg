@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/19"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="umg.biometrico.controlador.ControladorCatedratico"
+            prefWidth="1100" prefHeight="750"
+            stylesheets="@estilos.css">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" styleClass="top-bar">
+            <Button text="← Volver" onAction="#accionVolver" styleClass="btn-back"/>
+            <Label text="👩‍🏫 Proceso 4 — Dashboard de Asistencia" styleClass="top-title"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="0">
+            <!-- Barra de controles -->
+            <HBox spacing="14" alignment="CENTER_LEFT"
+                  style="-fx-background-color: white; -fx-padding: 14 18; -fx-border-color: #e5e7eb; -fx-border-width: 0 0 1 0;">
+                <Label text="Curso:" styleClass="form-label"/>
+                <ComboBox fx:id="comboCursos" prefWidth="320" onAction="#accionCargarAsistencia"/>
+                <Button text="🔄 Actualizar" onAction="#accionCargarAsistencia" styleClass="btn-secondary"/>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <VBox alignment="CENTER_RIGHT">
+                    <Label fx:id="etiquetaFecha" text="" style="-fx-font-size: 12px; -fx-text-fill: #6b7280;"/>
+                    <Label fx:id="etiquetaResumen" text="" style="-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #003366;"/>
+                </VBox>
+
+                <Button text="✅ Confirmar y Guardar Asistencia"
+                        fx:id="botonConfirmar" onAction="#accionConfirmarAsistencia"
+                        styleClass="btn-primary"/>
+            </HBox>
+
+            <!-- Árbol de tarjetas (FlowPane con ScrollPane) -->
+            <ScrollPane fx:id="scrollAsistencia" fitToWidth="true" VBox.vgrow="ALWAYS"
+                        style="-fx-background-color: #f3f4f6;">
+                <FlowPane fx:id="panelAsistencia" hgap="16" vgap="16"
+                          style="-fx-padding: 20; -fx-background-color: #f3f4f6;"/>
+            </ScrollPane>
+        </VBox>
+    </center>
+</BorderPane>
