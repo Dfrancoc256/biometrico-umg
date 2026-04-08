@@ -43,7 +43,7 @@ public class Persona {
     @Column(length = 200)
     private String seccion;
 
-    @Column(name = "numero_carnet", length = 40)
+    @Column(name = "numero_carnet", length = 40, nullable = false)
     private String numeroCarnet;
 
     @Column(length = 200)
